@@ -150,6 +150,29 @@ The `/telemetry` endpoint reports from the point of view of the peer being queri
 This includes less information than `/telemetry`, but provides information like shard transfer progress more reliably.
 You can find a full documentation of this endpoint in the [API reference](https://api.qdrant.tech/api-reference/service/cluster-telemetry).
 
+## Runtime Debugging Endpoints
+
+Qdrant exposes two runtime debugging endpoints that are useful during live troubleshooting:
+
+- `/logger` lets you inspect the current runtime logging configuration and update log verbosity without restarting the service.
+- `/stacktrace` returns a thread dump that can help diagnose stalls or deadlocks.
+
+Both endpoints should be treated as operator-only tools. Reading `/logger` requires authenticated access. Updating `/logger` and calling `/stacktrace` require manage access.
+
+```bash
+curl http://localhost:6333/logger \
+  --header "api-key: <API-KEY>"
+```
+
+```bash
+curl -X POST http://localhost:6333/logger \
+  --header "api-key: <API-KEY>" \
+  --header "Content-Type: application/json" \
+  --data "{\"log_level\":\"debug\"}"
+```
+
+At runtime, you can change log level, log format, span events, and on-disk logging settings. The log file path itself must still be configured in the main config file.
+
 ## Kubernetes health endpoints
 
 *Available as of v1.5.0*
