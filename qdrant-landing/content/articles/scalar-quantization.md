@@ -62,9 +62,7 @@ Our example shows that 99% of the values come from a `[-2.0, 5.0]` range. And th
 conversion to `int8` will surely lose some precision, so we rather prefer keeping the 
 representation accuracy within the range of 99% of the most probable values and ignoring
 the precision of the outliers. There might be a different choice of the range width, 
-actually, any value from a range `[0, 1]`, where `0` means empty range, and `1` would 
-keep all the values. That's a hyperparameter of the procedure called `quantile`. A value 
-of `0.95` or `0.99` is typically a reasonable choice, but in general `quantile ∈ [0, 1]`.
+The range width is controlled by `quantile`. In Qdrant, `quantile` must be in `[0.5, 1.0]`: `1.0` keeps the full value range, while lower values exclude more outliers. Values like `0.95` or `0.99` are common.
 
 #### Conversion to integers
 

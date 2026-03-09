@@ -193,7 +193,7 @@ There are 3 parameters that you can specify in the `quantization_config` section
 
 `type` - the type of the quantized vector components. Currently, Qdrant supports only `int8`.
 
-`quantile` - the quantile of the quantized vector components.
+`quantile` - controls quantization bounds. Allowed range: `[0.5, 1.0]`.
 The quantile is used to calculate the quantization bounds.
 For instance, if you specify `0.99` as the quantile, 1% of extreme values will be excluded from the quantization bounds.
 
