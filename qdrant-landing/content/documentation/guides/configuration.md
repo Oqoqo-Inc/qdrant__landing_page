@@ -399,6 +399,10 @@ service:
   # Uncomment to enable.
   # api_key: your_secret_api_key_here
 
+  # Set an alternate api-key that is accepted together with the primary key.
+  # Use this to rotate API keys without downtime.
+  # alt_api_key: your_next_api_key_here
+
   # Set an api-key for read-only operations.
   # If set, all requests must include a header with the api-key.
   # example header: `api-key: <API-KEY>`

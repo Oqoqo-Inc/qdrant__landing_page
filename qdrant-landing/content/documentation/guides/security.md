@@ -168,6 +168,18 @@ export QDRANT__SERVICE__READ_ONLY_API_KEY=your_secret_read_only_api_key_here
 
 Both API keys can be used simultaneously.
 
+### Rotate an API Key
+
+Qdrant can accept a second API key during key rotation. Set `service.alt_api_key` to the new key, restart or reload your configuration, migrate clients to the new key, then promote the new key to `service.api_key` and remove the old key.
+
+```yaml
+service:
+  api_key: current_api_key
+  alt_api_key: next_api_key
+```
+
+During the rotation window, requests authenticated with either key are accepted.
+
 ### Granular Access Control with JWT
 
 *Available as of v1.9.0*
