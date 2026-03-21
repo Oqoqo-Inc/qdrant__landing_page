@@ -79,6 +79,10 @@ Read more about vector types, how they are stored and optimized in the [vectors]
 To optimize performance, Qdrant supports batch loading of points. I.e., you can load several points into the service in one API call.
 Batching allows you to minimize the overhead of creating a network connection.
 
+<aside role="status">
+<b>Request size limit:</b> Self-hosted Qdrant enforces a maximum request body size of 32 MB by default (<code>service.max_request_size_mb</code> in the <a href="https://github.com/qdrant/qdrant/blob/master/config/config.yaml">configuration file</a>). If a single batch exceeds this limit, the request will be rejected. Split large uploads into smaller batches, or increase <code>service.max_request_size_mb</code> if your deployment can safely handle larger payloads.
+</aside>
+
 The Qdrant API supports two ways of creating batches - record-oriented and column-oriented.
 Internally, these options do not differ and are made only for the convenience of interaction.
 
