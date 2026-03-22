@@ -335,7 +335,7 @@ Specifically, it is a counting aggregation for the values in a field, akin to a 
 
 These results for a specific field is called a "facet". For example, when you look at an e-commerce search results page, you might see a list of brands on the sidebar, showing the number of products for each brand. This would be a facet for a `"brand"` field.
 
-<aside role="status">In Qdrant you can facet on a field <strong>only</strong> if you have created a field index that supports <code>MatchValue</code> conditions for it, like a <code>keyword</code> index.</aside>
+<aside role="status">In Qdrant you can facet on a field <strong>only</strong> if you have created a supported field index on it. The index types that support faceting are: <strong>keyword</strong>, <strong>bool</strong>, <strong>uuid</strong>, and <strong>integer</strong> (map index only). Other index types such as float, datetime, geo, and full-text do not support faceting and will return an error.</aside>
 
 To get the facet counts for a field, you can use the following:
 
