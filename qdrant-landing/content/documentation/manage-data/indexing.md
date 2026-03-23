@@ -85,6 +85,29 @@ supports only range filters:
 
 {{< code-snippet path="/documentation/headless/snippets/create-payload-index/integer-with-params/" >}}
 
+### Remove a payload index
+
+If a payload index was created on the wrong field or is no longer needed, you can remove it with a `DELETE` request:
+
+```http
+DELETE /collections/{collection_name}/index/{field_name}
+```
+
+```python
+client.delete_payload_index(
+    collection_name="{collection_name}",
+    field_name="{field_name}",
+)
+```
+
+```typescript
+client.deletePayloadIndex("{collection_name}", {
+    field_name: "{field_name}",
+});
+```
+
+Removing an index frees the memory and disk space it occupied. Queries that previously used the removed index will fall back to unindexed filtering, which may be slower on large collections.
+
 ### On-disk payload index
 
 *Available as of v1.11.0*
