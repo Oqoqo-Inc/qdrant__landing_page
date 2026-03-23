@@ -376,6 +376,10 @@ service:
   # Comment to disable gRPC:
   grpc_port: 6334
 
+  # Serve /metrics on a dedicated port for internal monitoring systems.
+  # This port is not protected by API keys, so only expose it to trusted networks.
+  # metrics_port: 9090
+
   # Enable CORS headers in REST API.
   # If enabled, browsers would be allowed to query REST endpoints regardless of query origin.
   # More info: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS

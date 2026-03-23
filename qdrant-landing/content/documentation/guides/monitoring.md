@@ -139,6 +139,17 @@ To achieve this you may use the following environment variable for example:
 QDRANT__SERVICE__METRICS_PREFIX="qdrant_"
 ```
 
+### Dedicated metrics port
+
+If you set `service.metrics_port`, Qdrant serves `/metrics` on a separate port. This endpoint is intended for internal monitoring systems and is not protected by API keys, so do not expose it to untrusted networks.
+
+```yaml
+service:
+  metrics_port: 9090
+```
+
+If `service.enable_tls` is enabled, the dedicated metrics port also uses TLS.
+
 ## Telemetry endpoint
 
 Qdrant also provides a `/telemetry` endpoint, which provides information about the current state of the database, including the number of vectors, shards, and other useful information. You can find a full documentation of this endpoint in the [API reference](https://api.qdrant.tech/api-reference/service/telemetry).
