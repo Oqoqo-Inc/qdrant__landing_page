@@ -174,6 +174,10 @@ The following parameters can be updated:
 * `params` - other collection parameters, including `read_fan_out_delay_ms`, `write_consistency_factor` and `on_disk_payload`. 
 * `strict_mode_config` - see [strict mode](/documentation/guides/administration/#strict-mode) for details.
 
+<aside role="alert">
+<b>Note on optimizer config fields:</b> Once <code>max_segment_size</code> is set to a concrete value via a collection update, it cannot be PATCHed back to <code>null</code> (automatic). The same applies to <code>memmap_threshold</code>, <code>indexing_threshold</code>, and <code>prevent_unoptimized</code> &mdash; these fields use <code>.or()</code> merge semantics internally, so omitting them in an update preserves the current value rather than clearing it. To restore default behavior for these fields, you must recreate the collection.
+</aside>
+
 Full API specification is available in [schema definitions](https://api.qdrant.tech/api-reference/collections/update-collection).
 
 Calls to this endpoint may be blocking as it waits for existing optimizers to
