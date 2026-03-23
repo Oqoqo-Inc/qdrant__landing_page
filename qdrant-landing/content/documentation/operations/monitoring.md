@@ -79,13 +79,11 @@ Counters - such as the number of created snapshots - are reset when the node is 
 | Name                                | Type      | Meaning                                                            |
 | ----------------------------------- | --------- | ------------------------------------------------------------------ |
 | rest_responses_total                | counter   | Number of responses through REST API                               |
-| rest_responses_fail_total           | counter   | Number of failed responses through REST API                        |
 | rest_responses_avg_duration_seconds | gauge     | Average response duration in REST API                              |
 | rest_responses_min_duration_seconds | gauge     | Minimum response duration in REST API                              |
 | rest_responses_max_duration_seconds | gauge     | Maximum response duration in REST API                              |
 | rest_responses_duration_seconds     | histogram | Histogram of response durations in the REST API <sup>(v1.8+)</sup> |
 | grpc_responses_total                | counter   | Number of responses through gRPC API                               |
-| grpc_responses_fail_total           | counter   | Number of failed responses through REST API                        |
 | grpc_responses_avg_duration_seconds | gauge     | Average response duration in gRPC API                              |
 | grpc_responses_min_duration_seconds | gauge     | Minimum response duration in gRPC API                              |
 | grpc_responses_max_duration_seconds | gauge     | Maximum response duration in gRPC API                              |
