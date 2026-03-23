@@ -70,20 +70,16 @@ To enable this, you need to set the `hnsw_config.on_disk` parameter to `true` du
 
 ## Payload storage
 
-Qdrant supports two types of payload storages: InMemory and OnDisk.
+Qdrant exposes payload placement through the `on_disk_payload` collection parameter.
 
-InMemory payload storage is organized in the same way as in-memory vectors.
-The payload data is loaded into RAM at service startup while disk and [Gridstore](/articles/gridstore-key-value-storage/) are used for persistence only.
-This type of storage works quite fast, but it may require a lot of space to keep all the data in RAM, especially if the payload has large values attached - abstracts of text or even images.
+- When `on_disk_payload` is `false`, Qdrant keeps payloads in a RAM-optimized mode for faster access. Disk and [Gridstore](/articles/gridstore-key-value-storage/) are used for persistence only.
+- When `on_disk_payload` is `true`, Qdrant uses a disk-backed payload mode to reduce RAM usage at the cost of higher payload access latency.
 
-In the case of large payload values, it might be better to use OnDisk payload storage.
-This type of storage will read and write payload directly to RocksDB, so it won't require any significant amount of RAM to store.
-The downside, however, is the access latency.
 If you need to query vectors with some payload-based conditions - checking values stored on disk might take too much time.
 In this scenario, we recommend creating a payload index for each field used in filtering conditions to avoid disk access.
 Once you create the field index, Qdrant will preserve all values of the indexed field in RAM regardless of the payload storage type.
 
-You can specify the desired type of payload storage with [configuration file](/documentation/guides/configuration/) or with collection parameter `on_disk_payload` during [creation](/documentation/concepts/collections/#create-collection) of the collection.
+You can specify payload storage behavior through the [configuration file](/documentation/guides/configuration/) or with the `on_disk_payload` collection parameter during [creation](/documentation/concepts/collections/#create-collection) of the collection.
 
 ## Versioning
 
