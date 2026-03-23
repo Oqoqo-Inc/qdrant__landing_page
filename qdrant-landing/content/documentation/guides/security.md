@@ -459,9 +459,12 @@ audit:
   dir: ./storage/audit
   rotation: daily
   max_log_files: 7
+  # If true, use X-Forwarded-For header to determine client IP in audit logs.
+  # Only enable this when running behind a trusted reverse proxy or load balancer.
+  trust_forwarded_headers: false
 ```
 
-By default, audit logs are rotated daily, and the seven most recent log files are kept. To configure hourly rotation, set `rotation` to `hourly`. When the number of log files exceeds `max_log_files`, the oldest log file is deleted.
+By default, audit logs are rotated daily, and the seven most recent log files are kept. To configure hourly rotation, set `rotation` to `hourly`. When the number of log files exceeds `max_log_files`, the oldest log file is deleted. Leave `trust_forwarded_headers` disabled unless Qdrant is behind a trusted reverse proxy or load balancer that overwrites `X-Forwarded-For`.
 
 <aside role="alert">Audit logging is verbose and audit logs can grow in size rapidly. Ensure that you have sufficient disk space.</aside>
 
