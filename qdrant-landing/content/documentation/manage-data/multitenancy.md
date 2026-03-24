@@ -26,6 +26,8 @@ When an instance is shared between multiple users, you may need to partition vec
     Note: The key doesn't necessarily need to be named <code>group_id</code>. You can choose a name that best suits your data structure and naming conventions.
 </aside>
 
+Qdrant does not infer tenancy from any special field name. The **tenant key** is simply whichever payload field you consistently filter on for tenant-scoped requests. Creating a payload index on that field with `is_tenant=true` tells Qdrant to co-locate vectors of the same tenant and optimize storage layout accordingly. Without the index, tenant-filtered searches still work but may scan more data than necessary.
+
 {{< code-snippet path="/documentation/headless/snippets/insert-points/with-tenant-group-id/" >}}
 
 2. Use a filter along with `group_id` to filter vectors for each user.
