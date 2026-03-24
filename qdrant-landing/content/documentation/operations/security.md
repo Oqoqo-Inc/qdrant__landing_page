@@ -149,6 +149,15 @@ client, err := qdrant.NewClient(&qdrant.Config{
 
 <aside role="alert">Internal communication channels are <strong>never</strong> protected by an API key nor bearer tokens. Internal gRPC uses port 6335 by default if running in distributed mode. You must ensure that this port is not publicly reachable and can only be used for node communication. By default, this setting is disabled for Qdrant Cloud and the Qdrant Helm chart.</aside>
 
+<aside role="status"><strong>Web UI dashboard exception:</strong> When the built-in Web UI is enabled, the <code>/dashboard</code> route is <strong>whitelisted</strong> from API key authentication so that the UI can load in a browser without embedding credentials in the URL. This means that anyone who can reach your Qdrant HTTP port can open the dashboard — even if you have set an <code>api_key</code>. The dashboard itself still requires an API key for any data operations it performs through the REST API, but the static UI assets are served without authentication.
+
+To restrict dashboard access on a self-hosted deployment:
+<ul>
+<li>Disable the Web UI entirely by setting <code>service.enable_static_content: false</code> in your configuration (or <code>QDRANT__SERVICE__ENABLE_STATIC_CONTENT=false</code>).</li>
+<li>Or use network-level controls (firewall rules, reverse proxy ACLs) to block external access to <code>/dashboard</code>.</li>
+</ul>
+</aside>
+
 ### Read-Only API Key
 
 *Available as of v1.7.0*
